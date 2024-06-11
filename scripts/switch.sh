@@ -7,7 +7,7 @@ jumps=$(
 	find ~/.config/tmux/scripts -type f -name "_*.sh" | while read -r f; do basename $f | sed 's/^_/:/' | sed 's/\.sh$//'; done | tr ' ' '\n'
 )
 
-selected=$(echo -e "$dirs\n$apps\n$jumps" | fzf)
+selected=$(echo -e "$apps\n$jumps\n$dirs" | fzf)
 
 if [[ -z $selected ]]; then
 	exit 0
@@ -15,7 +15,7 @@ fi
 
 if [[ ${selected:0:1} == ":" ]]; then
 	selected=$(echo $selected | cut -d ":" -f2)
-	
+
 	if [ -e "$HOME/.config/tmux/scripts/_$selected.sh" ]; then
 		"$HOME/.config/tmux/scripts/_$selected.sh"
 		exit 0
