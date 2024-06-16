@@ -30,9 +30,9 @@ selected_name=$(basename "$selected" | tr . _)
 tmux_running=$(pgrep tmux)
 
 command=""
-if [ -d "$selected/.git" ]; then
-	command=$EDITOR
-fi
+# if [ -d "$selected/.git" ]; then
+# 	command=$EDITOR
+# fi
 
 if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
 	tmux new-session -s $selected_name -c $selected $command
