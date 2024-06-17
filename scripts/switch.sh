@@ -2,7 +2,7 @@
 
 # TODO: read this from a config file
 
-dirs=$(find ~/.config/ ~/work ~/personal  -mindepth 1 -maxdepth 1 -type d | tr " " "\n")
+dirs=$(find ~/.config ~/work ~/personal  -mindepth 1 -maxdepth 1 -type d | tr " " "\n")
 apps=$(tmuxinator list -n | tail -n +2 | while read i; do printf ":$i\n"; done)
 jumps=$(
 	find ~/.config/tmux/scripts -type f -name "_*.sh" | while read -r f; do basename $f | sed 's/^_/:/' | sed 's/\.sh$//'; done | tr ' ' '\n'
