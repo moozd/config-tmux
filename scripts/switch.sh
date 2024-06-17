@@ -2,14 +2,13 @@
 
 # TODO: read this from a config file
 
-# dirs=$(find ~/.config/ ~/work ~/personal/ ~/personal/tools/ -mindepth 1 -maxdepth 1 -type d -exec test -d {}/.git \; -print | tr " " "\n")
-dirs=$(find ~/.config/ ~/work ~/personal/ ~/personal/tools/ -mindepth 1 -maxdepth 1 -type d | tr " " "\n")
-apps=$(tmuxinator list -n | tail -n +2 | while read i; do echo ":$i"; done)
+dirs=$(find ~/.config/ ~/work ~/personal  -mindepth 1 -maxdepth 1 -type d | tr " " "\n")
+apps=$(tmuxinator list -n | tail -n +2 | while read i; do printf ":$i"; done)
 jumps=$(
 	find ~/.config/tmux/scripts -type f -name "_*.sh" | while read -r f; do basename $f | sed 's/^_/:/' | sed 's/\.sh$//'; done | tr ' ' '\n'
 )
 
-selected=$(echo -e "$apps\n$jumps\n$dirs" | fzf)
+selected=$(printf "$apps\n$jumps\n$dirs" | fzf)
 
 if [[ -z $selected ]]; then
 	exit 0
